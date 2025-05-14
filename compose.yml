@@ -1,0 +1,8 @@
+services:
+  debian:
+    build: .
+    container_name: debian-latest
+    init: true
+    tty: true
+    volumes:
+      - ./behavior-packs:/behavior-packs

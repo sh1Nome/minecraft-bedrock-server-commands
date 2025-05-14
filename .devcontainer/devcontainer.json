@@ -1,0 +1,16 @@
+{
+  "name": "minecraft-bedrock-server-commands",
+  "dockerComposeFile": [
+    "../compose.yml"
+  ],
+  "service": "debian",
+  "workspaceFolder": "/behavior-packs",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "MinecraftCommands.syntax-mcfunction",
+        "GitHub.copilot"
+      ]
+    }
+  }
+}

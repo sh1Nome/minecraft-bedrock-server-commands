@@ -1,0 +1,18 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Jail generator function pack.",
+    "name": "JailGenerator",
+    "uuid": "b6e7c1e2-1b2a-4c7a-9e1a-000000000001",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 80]
+  },
+  "modules": [
+    {
+      "description": "Jail generator functions.",
+      "type": "data",
+      "uuid": "b6e7c1e2-1b2a-4c7a-9e1a-000000000002",
+      "version": [1, 0, 0]
+    }
+  ]
+}
