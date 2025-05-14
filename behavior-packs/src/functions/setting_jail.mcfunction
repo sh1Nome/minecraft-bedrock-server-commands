@@ -1,3 +1,5 @@
+# コマンドブロックの出力をオフにします
+gamerule commandblockoutput false
 # このコマンドは、実行位置を中心とした2x2x2範囲内のすべてのプレイヤーに
 # 最大レベル（255）の採掘速度低下を10秒間（パーティクル非表示）付与します。
 effect @a[x=~-1,y=~,z=~-1,dx=2,dy=2,dz=2] mining_fatigue 10 255 true
