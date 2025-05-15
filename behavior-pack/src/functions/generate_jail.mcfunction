@@ -1,19 +1,21 @@
-# 1. 外壁を作成
-fill ~-2 ~-4 ~-2 ~2 ~-1 ~2 bedrock
-fill ~-2 ~ ~-2 ~2 ~2 ~2 stone_bricks
+# 外壁を作成
+fill ~-2 ~-1 ~-2 ~2 ~2 ~2 stone_bricks
 
-# 2. 内部を空洞化
+# 内部を空洞化
 fill ~-1 ~0 ~-1 ~1 ~1 ~1 air
 
-# 3. 窓を作成
+# 窓を作成
 fill ~-2 ~1 ~-1 ~-2 ~1 ~1 iron_bars
 fill ~2 ~1 ~-1 ~2 ~1 ~1 iron_bars
 fill ~-1 ~1 ~-2 ~1 ~1 ~-2 iron_bars
 fill ~-1 ~1 ~2 ~1 ~1 ~2 iron_bars
 
-# 4. 地下にタグ付きアーマースタンドを埋め込む
-summon armor_stand ~ ~-3 ~
-tag @e[type=armor_stand,x=~,y=~-2,z=~,r=0.1] add jail_center
+# 地下に'jail_center'タグが付いたアーマースタンドを設置する
+summon armor_stand ~ ~ ~
+tag @e[type=armor_stand,x=~,y=~,z=~,r=1] add jail_center
 
-# 5. プレイヤーを外壁の上にテレポート
+# プレイヤーを外壁の上にテレポート
 tp @s ~ ~3 ~
+
+# 'jail_center'タグが付いたエンティティの位置で '_jail_adventure' 関数を実行します。
+execute as @e[tag=jail_center] at @s run function _jail_adventure
