@@ -5,4 +5,4 @@ services:
     init: true
     tty: true
     volumes:
-      - ./behavior-packs:/behavior-packs
+      - ./behavior-pack:/behavior-pack
