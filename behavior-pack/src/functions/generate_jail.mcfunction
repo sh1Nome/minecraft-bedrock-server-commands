@@ -10,12 +10,5 @@ fill ~2 ~1 ~-1 ~2 ~1 ~1 iron_bars
 fill ~-1 ~1 ~-2 ~1 ~1 ~-2 iron_bars
 fill ~-1 ~1 ~2 ~1 ~1 ~2 iron_bars
 
-# 地下に'jail_center'タグが付いたアーマースタンドを設置する
-summon armor_stand ~ ~ ~
-tag @e[type=armor_stand,x=~,y=~,z=~,r=1] add jail_center
-
-# プレイヤーを外壁の上にテレポート
-tp @s ~ ~3 ~
-
-# 'jail_center'タグが付いたエンティティの位置で '_jail_adventure' 関数を実行します。
-execute as @e[tag=jail_center] at @s run function _jail_adventure
+# 足元にリピートコマンドブロックを設置
+setblock ~ ~-1 ~ repeating_command_block
