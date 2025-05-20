@@ -24,8 +24,6 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           static_site_generator: none
-          # ディレクトリを指定
-          build_dir: docs
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
