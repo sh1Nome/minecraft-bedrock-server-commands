@@ -7,4 +7,6 @@ RUN apt-get update && apt-get install -y zip
 RUN useradd -m user
 USER user
 
-CMD ["sleep", "infinity"]
+WORKDIR /behavior-pack
+
+CMD ["sh", "-c", "sh pack.sh && sleep infinity"]
