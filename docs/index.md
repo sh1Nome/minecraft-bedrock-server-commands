@@ -1,3 +1,8 @@
+---
+title: Minecraft Bedrock Server Commands
+layout: default
+---
+
 # Minecraft Bedrock Server Commands
 
 マイクラ統合版のサーバー管理用のコマンド集です。  
