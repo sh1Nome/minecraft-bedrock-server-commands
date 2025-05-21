@@ -20,6 +20,9 @@ jobs:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
 
+      - name: 環境変数を更新
+        run: sh update_env.sh
+
       - name: Docker Composeでビヘイビアパックをビルド
         run: docker compose up
 
