@@ -58,7 +58,7 @@ jobs:
       - name: docs/index.mdにadmin-commands.mcpackのダウンロードリンクを埋め込む
         run: |
           MD_PATH="docs/index.md"
-          echo -e '\n[admin-commands.mcpackをダウンロード](./admin-commands.mcpack)' >> "$MD_PATH"
+          sed -i 's|{{DOWNLOAD_URL}}|./admin-commands.mcpack|g' "$MD_PATH"
 
       - name: GitHub Pagesのセットアップ
         uses: actions/configure-pages@v5
