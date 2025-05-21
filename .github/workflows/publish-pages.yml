@@ -24,7 +24,7 @@ jobs:
         run: sh update_env.sh
 
       - name: Docker Composeでビヘイビアパックをビルド
-        run: docker compose up
+        run: docker compose up -d --build
 
       - name: debian-latestコンテナのヘルスチェック待機
         run: |
