@@ -28,6 +28,7 @@ jobs:
           for i in {1..30}; do
             STATUS=$(docker inspect --format='{{.State.Health.Status}}' debian-latest 2>/dev/null || echo "notfound")
             if [ "$STATUS" = "healthy" ]; then
+              echo $STATUS # デバッグ
               echo "コンテナは正常です。"
               break
             elif [ "$STATUS" = "notfound" ]; then
