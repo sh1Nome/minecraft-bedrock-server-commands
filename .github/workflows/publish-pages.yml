@@ -23,20 +23,20 @@ jobs:
       - name: Build behavior-pack with Docker Compose
         run: docker compose up
 
-      - name: Move admin-commands.pack to docs
+      - name: Move admin-commands.mcpack to docs
         run: |
-          PACK_PATH="behavior-pack/dist/admin-commands.pack"
-          DEST_PATH="docs/admin-commands.pack"
+          PACK_PATH="behavior-pack/dist/admin-commands.mcpack"
+          DEST_PATH="docs/admin-commands.mcpack"
           if [ -f "$PACK_PATH" ]; then
             mv "$PACK_PATH" "$DEST_PATH"
           else
-            echo "admin-commands.pack not found!" && exit 1
+            echo "admin-commands.mcpack not found!" && exit 1
           fi
 
-      - name: Embed admin-commands.pack download link into docs/index.md
+      - name: Embed admin-commands.mcpack download link into docs/index.md
         run: |
           MD_PATH="docs/index.md"
-          echo -e '\n[admin-commands.packをダウンロード](./admin-commands.pack)' >> "$MD_PATH"
+          echo -e '\n[admin-commands.mcpackをダウンロード](./admin-commands.mcpack)' >> "$MD_PATH"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
