@@ -17,41 +17,60 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
 
-      - name: Build behavior-pack with Docker Compose
+      - name: Docker Composeでビヘイビアパックをビルド
         run: docker compose up
 
-      - name: Move admin-commands.mcpack to docs
+      - name: debian-latestコンテナのヘルスチェック待機
+        run: |
+          for i in {1..30}; do
+            STATUS=$(docker inspect --format='{{.State.Health.Status}}' debian-latest 2>/dev/null || echo "notfound")
+            if [ "$STATUS" = "healthy" ]; then
+              echo "コンテナは正常です。"
+              break
+            elif [ "$STATUS" = "notfound" ]; then
+              echo "コンテナが見つかりません。待機中..."
+            else
+              echo "現在のステータス: $STATUS"
+            fi
+            sleep 5
+            if [ $i -eq 30 ]; then
+              echo "コンテナが正常になるまでタイムアウトしました。"
+              exit 1
+            fi
+          done
+
+      - name: admin-commands.mcpackをdocsへ移動
         run: |
           PACK_PATH="behavior-pack/dist/admin-commands.mcpack"
           DEST_PATH="docs/admin-commands.mcpack"
           if [ -f "$PACK_PATH" ]; then
             mv "$PACK_PATH" "$DEST_PATH"
           else
-            echo "admin-commands.mcpack not found!" && exit 1
+            echo "admin-commands.mcpackが見つかりません！" && exit 1
           fi
 
-      - name: Embed admin-commands.mcpack download link into docs/index.md
+      - name: docs/index.mdにadmin-commands.mcpackのダウンロードリンクを埋め込む
         run: |
           MD_PATH="docs/index.md"
           echo -e '\n[admin-commands.mcpackをダウンロード](./admin-commands.mcpack)' >> "$MD_PATH"
 
-      - name: Setup Pages
+      - name: GitHub Pagesのセットアップ
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
+      - name: Jekyllでビルド
         uses: actions/jekyll-build-pages@v1
         with:
           source: docs
           destination: _site
 
-      - name: Upload artifact
+      - name: アーティファクトをアップロード
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
-      - name: Deploy to GitHub Pages
+      - name: GitHub Pagesへデプロイ
         id: deployment
         uses: actions/deploy-pages@v4
