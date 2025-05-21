@@ -3,9 +3,12 @@ FROM debian:latest
 # zipをインストール
 RUN apt-get update && apt-get install -y zip
 
-# 作業用ユーザーを作成
-RUN useradd -m user
-USER user
+# 作業ユーザーを作成
+ARG USER_ID
+ARG GROUP_ID
+RUN groupadd -g $GROUP_ID appuser && \
+    useradd -m -u $USER_ID -g appuser appuser
+USER appuser
 
 WORKDIR /behavior-pack
 
