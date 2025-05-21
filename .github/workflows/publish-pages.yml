@@ -20,6 +20,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Build behavior-pack with Docker Compose
+        run: docker compose up
+
+      - name: Move admin-commands.pack to docs
+        run: |
+          PACK_PATH="behavior-pack/dist/admin-commands.pack"
+          DEST_PATH="docs/admin-commands.pack"
+          if [ -f "$PACK_PATH" ]; then
+            mv "$PACK_PATH" "$DEST_PATH"
+          else
+            echo "admin-commands.pack not found!" && exit 1
+          fi
+
+      - name: Embed admin-commands.pack download link into docs/index.md
+        run: |
+          MD_PATH="docs/index.md"
+          echo -e '\n[admin-commands.packをダウンロード](./admin-commands.pack)' >> "$MD_PATH"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
