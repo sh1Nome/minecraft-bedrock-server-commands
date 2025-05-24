@@ -11,4 +11,5 @@ USER appuser
 
 WORKDIR /docs
 
-CMD ["sh", "-c", "npm install && sleep infinity"]
+CMD ["sh", "-c", "npm install && npm run docs:dev"]
+# http://localhost:5173/
