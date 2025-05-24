@@ -6,7 +6,7 @@ export default defineConfig({
   lang: "ja",
   title: "Minecraft Bedrock Server Commands",
   description: "マイクラ統合版のサーバー管理用のコマンド集です。",
-  base: isProd ? "https://sh1nome.github.io/minecraft-bedrock-server-commands/" : "/",
+  base: isProd ? "/minecraft-bedrock-server-commands/" : "/",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
