@@ -47,7 +47,7 @@ jobs:
 
       - name: admin-commands.mcpackをdocsへ移動
         run: |
-          PACK_PATH="behavior-pack/dist/admin-commands.mcpack"
+          PACK_PATH="behavior-pack/work/dist/admin-commands.mcpack"
           DEST_PATH="docs/admin-commands.mcpack"
           if [ -f "$PACK_PATH" ]; then
             mv "$PACK_PATH" "$DEST_PATH"

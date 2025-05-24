@@ -1,7 +1,7 @@
 services:
   debian:
     build:
-      context: .
+      context: ./behavior-pack
       args:
         USER_ID: ${USER_ID} # .envから取得する、事前にupdate_env.shを実行しておくこと
         GROUP_ID: ${GROUP_ID} # USER_IDと同様
@@ -9,4 +9,4 @@ services:
     init: true
     tty: true
     volumes:
-      - ./behavior-pack:/behavior-pack
+      - ./behavior-pack/work:/behavior-pack
