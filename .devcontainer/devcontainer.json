@@ -3,7 +3,7 @@
   "dockerComposeFile": [
     "../compose.yml"
   ],
-  "service": "debian",
+  "service": "behavior-pack",
   "workspaceFolder": "/behavior-pack",
   "customizations": {
     "vscode": {

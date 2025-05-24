@@ -1,11 +1,11 @@
 services:
-  debian:
+  behavior-pack:
     build:
       context: ./behavior-pack
       args:
         USER_ID: ${USER_ID} # .envから取得する、事前にupdate_env.shを実行しておくこと
         GROUP_ID: ${GROUP_ID} # USER_IDと同様
-    container_name: debian-latest
+    container_name: behaivior-pack
     init: true
     tty: true
     volumes:
