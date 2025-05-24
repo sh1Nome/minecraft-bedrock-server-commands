@@ -17,7 +17,3 @@ fi
 mv "$DIST_DIR/admin-commands.zip" "$DIST_DIR/admin-commands.mcpack"
 
 echo "$SRC_DIR 以下が admin-commands.mcpack として $DIST_DIR に作成されました。"
-
-# 成功フラグを作成
-# 失敗した場合はこのファイルが存在しないので、CI/CDのジョブでこのファイルの存在を確認することで成功を判定できる
-touch /tmp/pack_succeeded

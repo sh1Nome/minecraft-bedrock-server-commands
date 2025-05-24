@@ -11,5 +11,8 @@ USER appuser
 
 WORKDIR /docs
 
-CMD ["sh", "-c", "npm install && npm run docs:dev"]
+HEALTHCHECK --interval=5s --timeout=3s --start-period=5s --retries=10 \
+  CMD ["sh", "-c", "test -f /tmp/healthy && exit 0 || exit 1"]
+
+CMD ["sh", "-c", "npm install && touch /tmp/healthy && npm run docs:dev"]
 # http://localhost:5173/
