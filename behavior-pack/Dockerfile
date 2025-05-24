@@ -6,7 +6,9 @@ RUN apt-get update && apt-get install -y zip
 # 作業ユーザーを作成
 ARG USER_ID
 ARG GROUP_ID
-RUN groupadd -g $GROUP_ID appuser && \
+RUN getent group $GROUP_ID && groupdel $(getent group $GROUP_ID | cut -d: -f1) || true && \
+    getent passwd $USER_ID && userdel -r $(getent passwd $USER_ID | cut -d: -f1) || true && \
+    groupadd -g $GROUP_ID appuser && \
     useradd -m -u $USER_ID -g appuser appuser
 USER appuser
 

@@ -1,79 +1,79 @@
-name: Deploy GitHub Pages
+# name: Deploy GitHub Pages
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'jekyll/work/docs/**'
-      - '.github/workflows/publish-pages.yml'
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'jekyll/work/docs/**'
+#       - '.github/workflows/publish-pages.yml'
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: リポジトリをチェックアウト
-        uses: actions/checkout@v4
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: リポジトリをチェックアウト
+#         uses: actions/checkout@v4
 
-      - name: 環境変数を更新
-        run: sh update_env.sh
+#       - name: 環境変数を更新
+#         run: sh update_env.sh
 
-      - name: Docker Composeでビヘイビアパックをビルド
-        run: docker compose up -d --build
+#       - name: Docker Composeでビヘイビアパックをビルド
+#         run: docker compose up -d --build
 
-      - name: debian-latestコンテナのヘルスチェック待機
-        run: |
-          for i in {1..30}; do
-            STATUS=$(docker inspect --format='{{.State.Health.Status}}' debian-latest 2>/dev/null || echo "notfound")
-            if [ "$STATUS" = "healthy" ]; then
-              echo "コンテナは正常です。"
-              break
-            elif [ "$STATUS" = "notfound" ]; then
-              echo "コンテナが見つかりません。待機中..."
-            else
-              echo "現在のステータス: $STATUS"
-            fi
-            sleep 5
-            if [ $i -eq 30 ]; then
-              echo "コンテナが正常になるまでタイムアウトしました。"
-              exit 1
-            fi
-          done
+#       - name: debian-latestコンテナのヘルスチェック待機
+#         run: |
+#           for i in {1..30}; do
+#             STATUS=$(docker inspect --format='{{.State.Health.Status}}' debian-latest 2>/dev/null || echo "notfound")
+#             if [ "$STATUS" = "healthy" ]; then
+#               echo "コンテナは正常です。"
+#               break
+#             elif [ "$STATUS" = "notfound" ]; then
+#               echo "コンテナが見つかりません。待機中..."
+#             else
+#               echo "現在のステータス: $STATUS"
+#             fi
+#             sleep 5
+#             if [ $i -eq 30 ]; then
+#               echo "コンテナが正常になるまでタイムアウトしました。"
+#               exit 1
+#             fi
+#           done
 
-      - name: admin-commands.mcpackをjekyll/work/docsへ移動
-        run: |
-          PACK_PATH="behavior-pack/work/dist/admin-commands.mcpack"
-          DEST_PATH="jekyll/work/docs/admin-commands.mcpack"
-          if [ -f "$PACK_PATH" ]; then
-            mv "$PACK_PATH" "$DEST_PATH"
-          else
-            echo "admin-commands.mcpackが見つかりません！" && exit 1
-          fi
+#       - name: admin-commands.mcpackをjekyll/work/docsへ移動
+#         run: |
+#           PACK_PATH="behavior-pack/work/dist/admin-commands.mcpack"
+#           DEST_PATH="jekyll/work/docs/admin-commands.mcpack"
+#           if [ -f "$PACK_PATH" ]; then
+#             mv "$PACK_PATH" "$DEST_PATH"
+#           else
+#             echo "admin-commands.mcpackが見つかりません！" && exit 1
+#           fi
 
-      - name: jekyll/work/docs/index.mdにadmin-commands.mcpackのダウンロードリンクを埋め込む
-        run: |
-          MD_PATH="jekyll/work/docs/index.md"
-          sed -i 's|{{DOWNLOAD_URL}}|./admin-commands.mcpack|g' "$MD_PATH"
+#       - name: jekyll/work/docs/index.mdにadmin-commands.mcpackのダウンロードリンクを埋め込む
+#         run: |
+#           MD_PATH="jekyll/work/docs/index.md"
+#           sed -i 's|{{DOWNLOAD_URL}}|./admin-commands.mcpack|g' "$MD_PATH"
 
-      - name: GitHub Pagesのセットアップ
-        uses: actions/configure-pages@v5
+#       - name: GitHub Pagesのセットアップ
+#         uses: actions/configure-pages@v5
 
-      - name: Jekyllでビルド
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: jekyll/work/docs
-          destination: _site
+#       - name: Jekyllでビルド
+#         uses: actions/jekyll-build-pages@v1
+#         with:
+#           source: jekyll/work/docs
+#           destination: _site
 
-      - name: アーティファクトをアップロード
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
+#       - name: アーティファクトをアップロード
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: _site
 
-      - name: GitHub Pagesへデプロイ
-        id: deployment
-        uses: actions/deploy-pages@v4
+#       - name: GitHub Pagesへデプロイ
+#         id: deployment
+#         uses: actions/deploy-pages@v4
