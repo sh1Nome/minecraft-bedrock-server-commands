@@ -10,7 +10,7 @@ Minecraft Bedrock Edition 1.21.80 以上
 
 ## 方法
 
-1. [admin-commands.mcpack]({{DOWNLOAD_URL}}) をダウンロードする
+1. <a href="/admin-commands.mcpack" download>admin-commands.mcpack</a> をダウンロードする
 1. ダウンロードした`mcpack`をダブルクリックし、マイクラ統合版にインポートする
 1. ワールドの編集画面を開く
 1. ビヘイビアーパックから「管理コマンド集」を有効化する
